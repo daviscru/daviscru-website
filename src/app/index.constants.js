@@ -1,11 +1,10 @@
-/* global malarkey:false, toastr:false, moment:false */
+/* global  moment:false */
 (function() {
   'use strict';
 
   angular
     .module('yoAngular')
-    .constant('malarkey', malarkey)
-    .constant('toastr', toastr)
-    .constant('moment', moment);
+    .constant('moment', moment)
+    .constant('firebaseUrl', 'https://daviscru.firebaseio.com/');
 
 })();

@@ -10,7 +10,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/menu/menu.html',
-      controller: MenuController,
+      controller: ['menuRef', MenuController],
       controllerAs: 'menu',
       bindToController: true
     };
@@ -18,101 +18,17 @@
     return directive;
 
     /** @ngInject */
-    function MenuController() {
-      this.menuItems = [
-        {
-          "name" : "Home",
-          "url" : "home"
-        },
-        {
-          "name" : "Get Connected",
-          "url" : "get-connected",
-          "subPages" : [
-            {
-              "name" : "Summer Connect",
-              "url" : "summer-connect"
-            },
-            {
-              "category" : "Weekly Events",
-              "subPages" : [
-                {
-                  "name" : "Weekly Meeting",
-                  "url" : "weekly-meeting"
-                },
-                {
-                  "name" : "Grow, Pray, & Share",
-                  "url" : "grow-pray-share"
-                }
-              ]
-            },
-            {
-              "category" : "Freshmen",
-              "subPages" : [
-                {
-                  "name" : "Segundo",
-                  "url" : "segundo"
-                },
-                {
-                  "name" : "Tercero",
-                  "url" : "tercero"
-                },
-                {
-                  "name" : "Cuarto",
-                  "url" : "cuarto"
-                }
-              ]
-            },
-            {
-              "category" : "Interest Specific",
-              "subPages" : [
-                {
-                  "name" : "Arts and Humanities",
-                  "url" : "arts-humanities"
-                },
-                {
-                  "name" : "Science & Engineering",
-                  "url" : "science-engineering"
-                },
-                {
-                  "name" : "Transfers",
-                  "url" : "transfers"
-                }
-              ]
-            },
-            {
-              "category" : "Cultural Focused",
-              "subPages" : [
-                {
-                  "name" : "International",
-                  "url" : "international"
-                },
-                {
-                  "name" : "Destino",
-                  "url" : "destino"
-                },
-                {
-                  "name" : "Epic",
-                  "url" : "epic"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name" : "Events",
-          "url" : "events"
-        },
-        {
-          "name" : "Video",
-          "url" : "video"
-        }
-      ];
+    function MenuController(menuRef) {
+      this.menuItems = menuRef;
+      this.menuItems.$loaded(function() {
+        console.log('loaded menu');
+      });
 
       this.isCategory = function(item){
-        return item.url == null && item.category != null;
+        return item.url === undefined && item.category !== undefined;
       };
       this.hasSubPages = function(item){
-        return item.subPages != null;
+        return item.subPages !== undefined;
       };
       this.getProcessedUrl = function(item){
         return this.hasSubPages(item) ? 'javascript:;' : '/$url';
