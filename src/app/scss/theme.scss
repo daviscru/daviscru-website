@@ -1,0 +1,147 @@
+/** Angular CSS **/
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide {
+  display: none !important;
+}
+ng\:form {
+  display: block;
+}
+
+/*Remove spinner on number input*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/** Generic CSS **/
+body{
+  background-color: #444444;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.well{
+  margin-bottom: 10px;
+}
+
+.body-container{
+  background-color: #FFFFFF;
+  padding-bottom: 10px;
+}
+
+a:hover, a:focus{
+  text-decoration: none;
+}
+
+.logo{
+  padding: 5px 10px;
+  max-height: 150px;
+}
+@font-face {
+  font-family: 'freightsans_prolight';
+  src: url('../fonts/freigsanprolig-webfont.eot');
+  src: url('../fonts/freigsanprolig-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/freigsanprolig-webfont.woff') format('woff'),
+  url('../fonts/freigsanprolig-webfont.ttf') format('truetype'),
+  url('../fonts/freigsanprolig-webfont.svg#freightsans_prolight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.logo-tagline{
+  font-size: 45px;
+  padding-top: 86px;
+  color: #919191;
+  font-family: 'freightsans_prolight', sans-serif;
+  text-transform: uppercase;
+}
+
+
+footer{
+  padding: 6px;
+  color: #999999;
+  font-family: Geneva, Tahoma, Verdana, sans-serif;
+}
+footer a{
+  color: #BBBBBB;
+}
+footer a:hover, a:focus{
+  color: #CCCCCC;
+}
+.colored-bars{
+  background-color: #666666;
+}
+.colored-bars .colored-bar{
+  padding: 6px 0px;
+}
+.colored-bars-thin .colored-bar{
+  padding: 4px 0px;
+}
+.colored-bars .colored-bar-left{
+  background-color: #F9B625;
+}
+.colored-bars .colored-bar-left-middle{
+  background-color: #007398;
+}
+.colored-bars .colored-bar-right-middle{
+  background-color: #3DB1C8;
+}
+.colored-bars .colored-bar-right{
+  background-color: #DD7D1B;
+}
+
+.jumbotron{
+  margin-top: 20px;
+  background-color: #F6F0E2;
+}
+
+h1 .small, h2 .small{
+  font-size: 70%;
+  font-weight: normal;
+  line-height: 1;
+  color: #999;
+}
+
+.admin-toolbar-wrapper{
+  background-color: #444444;
+  border-bottom: 2px solid #282828;
+}
+.admin-toolbar{
+  margin-top: 5px;
+}
+.admin-toolbar .dropdown-menu{
+  z-index: 1001;
+}
+#status-bar{
+  margin-top: 4px;
+  margin-bottom: -12px;
+}
+
+.stats-thumbnail{
+  margin-bottom: 10px;
+}
+.stats-form .form-control{
+  margin-bottom: 7px;
+}
+
+.page-message{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #222;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(255,255,255,0.25);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  font-size: 5em;
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+@-moz-document url-prefix() {
+  .page-message{
+    color: #000;
+    background: none;
+  }
+}

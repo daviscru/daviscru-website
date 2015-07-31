@@ -1,0 +1,100 @@
+.navbar{
+  margin-bottom: 0px;
+  border: none;
+}
+.navbar-dark{
+  background-color: #282828;
+  border-color: #858585;
+  font-family: Geneva, Tahoma, Verdana, sans-serif;
+  letter-spacing: 1px;
+}
+.navbar-dark .navbar-nav>li>a{
+  color: #FFF;
+  text-shadow: 0px 0px 6px #222;
+}
+.navbar-dark .nav>li>a:hover, .nav>li>a:focus {
+  background-color: #DE711C;
+}
+.navbar-dark .navbar-nav>.active>a{
+  color: #FFF;
+  background-color: #ECA710;
+}
+.navbar-dark .navbar-nav>.active>a:hover,  .navbar-nav>.active>a:focus{
+  color: #FFF;
+  background-color: #ECA710;
+}
+.navbar-dark .open>a, .nav>.open>a:hover, .nav>.open>a:focus {
+  background-color: #DE711C;
+}
+.navbar-dark .open.active>a, .nav>.open.active>a:hover, .nav>.open.active>a:focus {
+  background-color: #ECA710;
+}
+.navbar-dark a .caret {
+  border-top-color: #FFF;
+  border-bottom-color: #FFF;
+}
+.navbar-dark a:hover .caret {
+  border-top-color: #FFF;
+  border-bottom-color: #FFF;
+}
+.navbar-dark .navbar-nav>.active a .caret {
+  border-top-color: #FFF;
+  border-bottom-color: #FFF;
+}
+.navbar-dark .navbar-nav>.active a:hover .caret {
+  border-top-color: #FFF;
+  border-bottom-color: #FFF;
+}
+.navbar-dark .dropdown-menu{
+  background-color: #F5F5F5;
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #C0DAE2;
+}
+.affix{
+  top: 0px;
+  z-index: 50;
+  width: 100%;
+}
+.affix-container{
+  height: 50px;
+}
+.navbar-logo{
+  display: none;
+  max-height: 42px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-right: 8px;
+}
+.affix .navbar-logo{
+  display: inline;
+}
+.accout-dropdown{
+  height: 50px;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.account-dropdown > img{
+  width: 50px;
+  height: 50px;
+}
+.social-btn{
+  float: left !important;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.nav>li.nav-image>a {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav>li.nav-image-borderless>a {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.nav>li.no-hover>a:hover, .nav>li.no-hover>a:focus {
+  background-color: transparent;
+}
