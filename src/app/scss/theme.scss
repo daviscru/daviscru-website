@@ -43,11 +43,11 @@ a:hover, a:focus{
 }
 @font-face {
   font-family: 'freightsans_prolight';
-  src: url('../fonts/freigsanprolig-webfont.eot');
-  src: url('../fonts/freigsanprolig-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/freigsanprolig-webfont.woff') format('woff'),
-  url('../fonts/freigsanprolig-webfont.ttf') format('truetype'),
-  url('../fonts/freigsanprolig-webfont.svg#freightsans_prolight') format('svg');
+  src: url('../../assets/fonts/freigsanprolig-webfont.eot');
+  src: url('../../assets/fonts/freigsanprolig-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../../assets/fonts/freigsanprolig-webfont.woff') format('woff'),
+  url('../../assets/fonts/freigsanprolig-webfont.ttf') format('truetype'),
+  url('../../assets/fonts/freigsanprolig-webfont.svg#freightsans_prolight') format('svg');
   font-weight: normal;
   font-style: normal;
 }
