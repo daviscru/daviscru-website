@@ -13,14 +13,14 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="{'dropdown': menuItem.hasSubPages, 'active': isActive(menuItem.url)}" ng-repeat="menuItem in menuItems">
-              <a href="{{menuItem.processedUrl}}" ng-class="{'dropdown-toggle': menuItem.hasSubPages}" ng-attr-data-toggle="{{menuItem.hasSubPages ? 'dropdown' : ''}}">{{menuItem.name}} <b ng-class="{'caret': menuItem.hasSubPages}"></b></a>
-              <ul class="dropdown-menu" ng-if="menuItem.hasSubPages">
-                <li ng-switch="subMenuItem.isCategory" ng-repeat="subMenuItem in menuItem.subMenuItems">
-                  <a href="/{{menuItem.url + '/' + subMenuItem.url}}" ng-unless="subMenuItem.isCategory">{{subMenuItem.name}}</a>
-                  <div class="divider" ng-if="!$first && subMenuItem.isCategory"></div>
-                  <span class="dropdown-header" ng-if="subMenuItem.isCategory">{{subMenuItem.name}}</span>
-                  <a href="/{{menuItem.url + '/' + subSubMenuItem.url}}" ng-repeat="subSubMenuItem in subMenuItem.subMenuItems">{{subSubMenuItem.name}}</a>
+            <li ng-class="{'dropdown': menuItem.hasSubPages, 'active': isActive(menuItem.url)}" ng-repeat="menuItem in menu.menuItems">
+              <a href="{{menu.getProcessedUrl(menuItem)}}" ng-class="{'dropdown-toggle': menu.hasSubPages(menuItem)}" ng-attr-data-toggle="{{menu.hasSubPages(menuItem) ? 'dropdown' : ''}}">{{menuItem.name}} <b ng-class="{'caret': menu.hasSubPages(menuItem)}"></b></a>
+              <ul class="dropdown-menu" ng-if="menu.hasSubPages(menuItem)">
+                <li ng-switch="subMenuItem.isCategory" ng-repeat="subMenuItem in menuItem.subPages">
+                  <a href="/{{menuItem.url + '/' + subMenuItem.url}}" ng-unless="menu.isCategory(subMenuItem)">{{subMenuItem.name}}</a>
+                  <div class="divider" ng-if="!$first && menu.isCategory(subMenuItem)"></div>
+                  <span class="dropdown-header" ng-if="menu.isCategory(subMenuItem)">{{subMenuItem.category}}</span>
+                  <a href="/{{menuItem.url + '/' + subSubMenuItem.url}}" ng-repeat="subSubMenuItem in subMenuItem.subPages">{{subSubMenuItem.name}}</a>
                 </li>
               </ul>
             </li>
