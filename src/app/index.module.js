@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('yoAngular', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'firebase']);
+    .module('davisCru', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'firebase']);
 
 })();

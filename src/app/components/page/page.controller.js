@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('yoAngular')
+    .module('davisCru')
     .controller('PageController', ['global', 'fbPages', PageController]);
 
   /** @ngInject */

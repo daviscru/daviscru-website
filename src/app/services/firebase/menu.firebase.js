@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('yoAngular')
+    .module('davisCru')
     .factory("fbMenu", ["firebaseUrl", "$firebaseArray",
       function(firebaseUrl, $firebaseArray) {
         var ref = new Firebase(firebaseUrl + 'menu');

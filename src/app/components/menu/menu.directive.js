@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('yoAngular')
+    .module('davisCru')
     .directive('mainMenu', menu);
 
   /** @ngInject */

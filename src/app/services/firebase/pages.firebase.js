@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('yoAngular')
+    .module('davisCru')
     .factory("fbPages", ["firebaseUrl", "$firebaseObject",
       function(firebaseUrl, $firebaseObject ) {
         return function(pageUrl){

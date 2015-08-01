@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('yoAngular')
+    .module('davisCru')
     .constant('moment', moment)
     .constant('firebaseUrl', 'https://daviscru.firebaseio.com/');
 

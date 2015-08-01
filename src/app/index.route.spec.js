@@ -14,7 +14,7 @@
     }
 
     beforeEach(function() {
-      module('yoAngular');
+      module('davisCru');
 
       inject(function (_$rootScope_, _$location_, _$state_, _$stateParams_, _$templateCache_, _global_) {
         $rootScope = _$rootScope_;

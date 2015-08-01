@@ -3,7 +3,7 @@
 
   describe('controllers', function(){
 
-    beforeEach(module('yoAngular'));
+    beforeEach(module('davisCru'));
 
     it('should load the controller ok', inject(function($controller) {
       //var vm = $controller('PageController');
