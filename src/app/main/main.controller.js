@@ -3,9 +3,10 @@
 
   angular
     .module('yoAngular')
-    .controller('MainController', MainController);
+    .controller('MainController', ['$stateParams', MainController]);
 
   /** @ngInject */
-  function MainController() {
+  function MainController($stateParams) {
+    this.pageUrl = $stateParams.pageUrl || 'home';
   }
 })();

@@ -9,7 +9,7 @@
   function menu() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/components/menu/menu.html',
+      templateUrl: '/app/components/menu/menu.html',
       controller: ['menuRef', MenuController],
       controllerAs: 'menu',
       bindToController: true
@@ -31,7 +31,7 @@
         return item.subPages !== undefined;
       };
       this.getProcessedUrl = function(item){
-        return this.hasSubPages(item) ? 'javascript:;' : '/$url';
+        return this.hasSubPages(item) ? 'javascript:;' : '/' + item.url;
       };
 
       initAffix();
