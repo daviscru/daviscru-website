@@ -10,7 +10,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: '/app/components/menu/menu.html',
-      controller: ['fbMenu', '$stateParams', MenuController],
+      controller: ['global', 'fbMenu', MenuController],
       controllerAs: 'menu',
       bindToController: true
     };
@@ -18,7 +18,8 @@
     return directive;
 
     /** @ngInject */
-    function MenuController(fbMenu) {
+    function MenuController(global, fbMenu) {
+      this.global = global;
       this.menuItems = fbMenu;
       this.menuItems.$loaded(function() {
         console.log('loaded menu');
@@ -32,6 +33,10 @@
       };
       this.getProcessedUrl = function(item){
         return this.hasSubPages(item) ? '#' : '/' + item.url;
+      };
+
+      this.isActive = function(url){
+        return this.global.getPageUrl().split('/')[0] === url;
       };
 
       initAffix();

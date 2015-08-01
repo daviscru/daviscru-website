@@ -13,7 +13,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="{'dropdown': menuItem.hasSubPages, 'active': isActive(menuItem.url)}" ng-repeat="menuItem in menu.menuItems">
+            <li ng-class="{'dropdown': menuItem.hasSubPages, 'active': menu.isActive(menuItem.url)}" ng-repeat="menuItem in menu.menuItems">
               <a href="{{menu.getProcessedUrl(menuItem)}}" ng-class="{'dropdown-toggle': menu.hasSubPages(menuItem)}" ng-attr-data-toggle="{{menu.hasSubPages(menuItem) ? 'dropdown' : ''}}">{{menuItem.name}} <b ng-class="{'caret': menu.hasSubPages(menuItem)}"></b></a>
               <ul class="dropdown-menu" ng-if="menu.hasSubPages(menuItem)">
                 <li ng-switch="subMenuItem.isCategory" ng-repeat="subMenuItem in menuItem.subPages">

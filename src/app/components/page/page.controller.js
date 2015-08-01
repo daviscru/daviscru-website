@@ -7,6 +7,6 @@
 
   /** @ngInject */
   function PageController(global) {
-    this.pageUrl = global.getPageUrl();
+    this.global = global;
   }
 })();
