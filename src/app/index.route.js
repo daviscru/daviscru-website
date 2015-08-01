@@ -10,9 +10,12 @@
     $stateProvider
       .state('pages', {
         url: '/{pageUrl:.*}',
-        templateUrl: '/app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        templateUrl: '/app/components/page/page.html',
+        controller: 'PageController',
+        controllerAs: 'page',
+        onEnter: function(global, $stateParams){
+          global.setPageUrl($stateParams.pageUrl || 'home');
+        }
       });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true).hashPrefix('!');

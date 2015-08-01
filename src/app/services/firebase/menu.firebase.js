@@ -3,7 +3,7 @@
 
   angular
     .module('yoAngular')
-    .factory("menuRef", ["firebaseUrl", "$firebaseArray",
+    .factory("fbMenu", ["firebaseUrl", "$firebaseArray",
       function(firebaseUrl, $firebaseArray) {
         var ref = new Firebase(firebaseUrl + 'menu');
 
