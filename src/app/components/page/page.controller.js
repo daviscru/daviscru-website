@@ -10,7 +10,9 @@
     this.global = global;
     this.page = fbPages(global.getPageUrl());
     this.page.$loaded(function() {
-      console.log('loaded pages');
+
+    }, function(error) {
+      console.error("Error:", error);
     });
   }
 })();

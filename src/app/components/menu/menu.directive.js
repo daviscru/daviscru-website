@@ -10,7 +10,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: '/app/components/menu/menu.html',
-      controller: ['global', 'fbMenu', MenuController],
+      controller: ['global', 'fbMenu', 'authentication', MenuController],
       controllerAs: 'menu',
       bindToController: true
     };
@@ -18,11 +18,16 @@
     return directive;
 
     /** @ngInject */
-    function MenuController(global, fbMenu) {
+    function MenuController(global, fbMenu, authentication) {
       this.global = global;
       this.menuItems = fbMenu;
+      this.auth = authentication;
+      this.loaded = false;
+
       this.menuItems.$loaded(function() {
-        console.log('loaded menu');
+        this.loaded = true;
+      }.bind(this), function(error) {
+        console.error("Error:", error);
       });
 
       this.isCategory = function(item){
@@ -43,6 +48,8 @@
       initImgRollover();
     }
 
+
+    //TODO: Update jquery functions
     function initAffix(){
       $('#navbar-affix').affix({
         offset: {

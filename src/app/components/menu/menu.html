@@ -13,6 +13,13 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+            <li ng-if="!menu.loaded">
+              <div class="three-bounce-spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+              </div>
+            </li>
             <li ng-class="{'dropdown': menuItem.hasSubPages, 'active': menu.isActive(menuItem.url)}" ng-repeat="menuItem in menu.menuItems">
               <a href="{{menu.getProcessedUrl(menuItem)}}" ng-class="{'dropdown-toggle': menu.hasSubPages(menuItem)}" ng-attr-data-toggle="{{menu.hasSubPages(menuItem) ? 'dropdown' : ''}}">{{menuItem.name}} <b ng-class="{'caret': menu.hasSubPages(menuItem)}"></b></a>
               <ul class="dropdown-menu" ng-if="menu.hasSubPages(menuItem)">
@@ -25,26 +32,26 @@
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right" ng-switch="auth.signedIn"><!-- switch on user logged in-->
+          <ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.signedIn"><!-- switch on user logged in-->
             <li class="dropdown nav-image-borderless" ng-switch-when="true">
-              <a href="javascript:;" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{auth.profilePicture}}" /> {{auth.name}} <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.name}} <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li ng-if="auth.isAdmin" class="dropdown-header">Admin</li>
-                <li ng-if="auth.isAdmin"><a href="/admin"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                <li ng-if="auth.isAdmin"><a href="/admin/pages"><span class="glyphicon glyphicon-list-alt"></span> Pages</a></li>
-                <li ng-if="auth.isAdmin"><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
-                <li ng-if="auth.isAdmin" class="divider"></li>
+                <li ng-if="menu.auth.isAdmin" class="dropdown-header">Admin</li>
+                <li ng-if="menu.auth.isAdmin"><a href="/admin"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                <li ng-if="menu.auth.isAdmin"><a href="/admin/pages"><span class="glyphicon glyphicon-list-alt"></span> Pages</a></li>
+                <li ng-if="menu.auth.isAdmin"><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
+                <li ng-if="menu.auth.isAdmin" class="divider"></li>
 
-                <li ng-if="auth.canEdit" class="dropdown-header">Tools</li>
-                <li ng-if="auth.canEdit"><a href="/tools/stats"><span class="glyphicon glyphicon-stats"></span> Ministry Indicators</a></li>
-                <li ng-if="auth.canEdit" class="divider"></li>
+                <li ng-if="menu.auth.canEdit" class="dropdown-header">Tools</li>
+                <li ng-if="menu.auth.canEdit"><a href="/tools/stats"><span class="glyphicon glyphicon-stats"></span> Ministry Indicators</a></li>
+                <li ng-if="menu.auth.canEdit" class="divider"></li>
 
                 <li class="dropdown-header">Account</li>
-                <li><a href="javascript:;" ng-click="auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
+                <li><a href="#" ng-click="menu.auth.logout()"><span class="glyphicon glyphicon-log-out"></span> Sign out</a></li>
               </ul>
             </li>
-            <li ng-switch-when="false" class="nav-image no-hover" ng-show="auth.googleBtnVisible">
-              <a href="javascript:;" ng-click="auth.login()">
+            <li ng-switch-when="false" class="nav-image no-hover"><!-- ng-show="auth.googleBtnVisible"-->
+              <a href="#" ng-click="menu.auth.login()">
                 <img src="/assets/images/google_signin_base.png"
                      width="123"
                      height="42"
@@ -52,13 +59,6 @@
                      data-click="/assets/images/google_signin_press.png"
                      data-surrounding-class="social-btn" />
               </a>
-            </li>
-            <li ng-hide="auth.googleBtnVisible">
-              <div class="three-bounce-spinner">
-                <div class="bounce1"></div>
-                <div class="bounce2"></div>
-                <div class="bounce3"></div>
-              </div>
             </li>
           </ul>
         </div>
