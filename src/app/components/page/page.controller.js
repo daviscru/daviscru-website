@@ -3,19 +3,18 @@
 
   angular
     .module('davisCru')
-    .controller('PageController', ['global', 'fbPages', PageController]);
+    .controller('PageController', ['global', 'fbWidgets', PageController]);
 
   /** @ngInject */
-  function PageController(global, fbPages) {
+  function PageController(global, fbWidgets) {
     this.global = global;
-    var page = fbPages(global.getPageUrl());
+    this.widgets = fbWidgets(global.getPageUrl());
     this.loadStatus = 'loading';
 
-    page.$loaded(function() {
-      if(page.$value === null){
+    this.widgets.$loaded(function() {
+      if(this.widgets.length === 0){
         this.loadStatus = 'error';
       }else{
-        this.widgets = page.widgets;
         this.loadStatus = 'success';
       }
     }.bind(this), function(error) {
