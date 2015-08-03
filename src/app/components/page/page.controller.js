@@ -12,8 +12,12 @@
     this.loadStatus = 'loading';
 
     page.$loaded(function() {
-      this.widgets = page.widgets;
-      this.loadStatus = 'success';
+      if(page.$value === null){
+        this.loadStatus = 'error';
+      }else{
+        this.widgets = page.widgets;
+        this.loadStatus = 'success';
+      }
     }.bind(this), function(error) {
       this.loadStatus = 'error';
       console.error("Error:", error);
