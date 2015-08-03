@@ -1,0 +1,57 @@
+# Documentation: https://github.com/firebase/blaze_compiler
+functions:
+  - hasAuth(): auth !== null
+  - isAdmin(): hasAuth() && root.users[auth.uid].role === 'admin'
+  - authMatchesPath(userUid): hasAuth() && auth.uid === userUid
+
+schema:
+  type: object
+  properties:
+    menu:
+      type: object
+    pages:
+      type: object
+    users:
+      type: object
+      $user_uid:
+        type: object
+        required: [name, email]
+        properties:
+          name:
+            type: string
+          email:
+            type: string
+          profilePicture:
+            type: string
+          role:
+            type: string
+            enum: [admin, user]
+        additionalProperties: false
+
+        examples:
+          - {name: "My Name", email: "myemail@example.com"}
+          - {name: "My Name", email: "myemail@example.com", role: "admin"}
+          - {name: "My Name", email: "myemail@example.com", role: "user"}
+          - {name: "My Name", email: "myemail@example.com", profilePicture: "http://url.com"}
+          - {name: "My Name", email: "myemail@example.com", profilePicture: "http://url.com", role: "admin"}
+          - {name: "My Name", email: "myemail@example.com", profilePicture: "http://url.com", role: "user"}
+        nonexamples:
+          - {new:   "value"}
+          - {name:  "My Name"}
+          - {email: "myemail@example.com"}
+          - {name:  "My Name", email: "myemail@example.com", role: "somethingElse"}
+
+access:
+  - location: "/menu/"
+    read: true
+    write: isAdmin()
+  - location: "/pages/"
+    read: true
+    write: isAdmin()
+  - location: "/users/"
+    read: isAdmin()
+  - location: "/users/$user_uid/"
+    read: authMatchesPath($user_uid) || isAdmin()
+    write: authMatchesPath($user_uid)
+  - location: "/users/$user_uid/role/"
+    write: isAdmin()

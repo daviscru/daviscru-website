@@ -34,7 +34,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right" ng-switch="menu.auth.signedIn"><!-- switch on user logged in-->
             <li class="dropdown nav-image-borderless" ng-switch-when="true">
-              <a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.profilePicture}}" /> {{menu.auth.name}} <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle account-dropdown" data-toggle="dropdown"><img ng-src="{{menu.auth.user.profilePicture}}" /> {{menu.auth.user.name}} <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li ng-if="menu.auth.isAdmin" class="dropdown-header">Admin</li>
                 <li ng-if="menu.auth.isAdmin"><a href="/admin"><span class="glyphicon glyphicon-home"></span> Home</a></li>

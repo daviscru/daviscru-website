@@ -12,7 +12,7 @@
           pageUrl = pageUrl.replace('/', '/subPages/');
           var ref = new Firebase(firebaseUrl + 'pages/' + pageUrl + '/widgets');
           return $firebaseArray(ref);
-        }
+        };
       }
     ]);
 
