@@ -8,11 +8,15 @@
   /** @ngInject */
   function PageController(global, fbPages) {
     this.global = global;
-    this.page = fbPages(global.getPageUrl());
-    this.page.$loaded(function() {
+    var page = fbPages(global.getPageUrl());
+    this.loadStatus = 'loading';
 
-    }, function(error) {
+    page.$loaded(function() {
+      this.widgets = page.widgets;
+      this.loadStatus = 'success';
+    }.bind(this), function(error) {
+      this.loadStatus = 'error';
       console.error("Error:", error);
-    });
+    }.bind(this));
   }
 })();

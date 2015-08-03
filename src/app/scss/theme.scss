@@ -126,22 +126,3 @@ h1 .small, h2 .small{
 .stats-form .form-control{
   margin-bottom: 7px;
 }
-
-.page-message{
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: #222;
-  color: transparent;
-  text-shadow: 0px 2px 3px rgba(255,255,255,0.25);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  font-size: 5em;
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-}
-@-moz-document url-prefix() {
-  .page-message{
-    color: #000;
-    background: none;
-  }
-}

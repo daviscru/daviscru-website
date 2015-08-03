@@ -1,13 +1,255 @@
-<div class="container">
-<pre>
-page.global.getPageUrl(): {{page.global.getPageUrl()}}
-{{page.page | json}}
-</pre>
-  <div class="jumbotron text-center">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">
-      Always a pleasure scaffolding your apps.
-    </p>
+<div class="container" ng-if="page.loadStatus == 'loading'">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="page-message">Loading</div>
+      <div class="circle-spinner">
+        <div class="spinner-container container1">
+          <div class="circle1"></div>
+          <div class="circle2"></div>
+          <div class="circle3"></div>
+          <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container2">
+          <div class="circle1"></div>
+          <div class="circle2"></div>
+          <div class="circle3"></div>
+          <div class="circle4"></div>
+        </div>
+        <div class="spinner-container container3">
+          <div class="circle1"></div>
+          <div class="circle2"></div>
+          <div class="circle3"></div>
+          <div class="circle4"></div>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+<div class="container" ng-if="loadStatus == 'error'">
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <div class="well text-center">
+        <div class="page-message">Opps</div>
+        <h2>The requested page could not be found</h2>
+        <h4>Please use the menu above to find what you are looking for.</h4>
+        <a href="/home" type="button" class="btn btn-primary">Home <span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="admin-toolbar-wrapper" ng-if="page.loadStatus == 'success' && page.auth.canEdit">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 admin-toolbar">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <button type="button" class="btn btn-success" data-page-operation="publish"><span class="glyphicon glyphicon-check"></span> Publish</button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span> Add Widget <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-header">Large Components</li>
+                <li><a href="#" ng-click="page.addWidget('pageheader')">Page Header</a></li>
+                <li><a href="#" ng-click="page.addWidget('jumbotron')">Jumbotron</a></li>
+                <li><a href="#" ng-click="page.addWidget('carousel')">Carousel</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Media Display</li>
+                <li><a href="#" ng-click="page.addWidget('thumbnail')">Thumbnail</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Content Pieces</li>
+                <li><a href="#" ng-click="page.addWidget('well')">Well</a></li>
+                <li><a href="#" ng-click="page.addWidget('3-panel-grid')">3 Panel Grid</a></li>
+                <li><a href="#" ng-click="page.addWidget('featurette')">Featurette</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Simple Widgets</li>
+                <li><a href="#" ng-click="page.addWidget('text')">Text</a></li>
+                <li><a href="#" ng-click="page.addWidget('html')">HTML Code</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">External Resources</li>
+                <li><a href="#" ng-click="page.addWidget('youtube')">YouTube Video</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-list"></span> Manage Subpages</button>
+          </div>
+          <div class="btn-group">
+            <!--<button type="button" class="btn btn-info" disabled="disabled"><span class="glyphicon glyphicon-eye-open"></span> Show Page</button>-->
+            <button type="button" class="btn btn-info" disabled="disabled"><span class="glyphicon glyphicon-eye-close"></span> Hide Page</button>
+            <button type="button" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Page Settings</button>
+            <button type="button" class="btn btn-danger" data-page-operation="discardChanges"><span class="glyphicon glyphicon-repeat"></span> Discard Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div id="status-bar">
+          <!--<span class="label label-default" data-toggle="tooltip" title="{{ times.created.timestamp | date:'medium' }}">Created: {{ times.created.timesince }} ago</span>
+                    <span class="label label-success" data-toggle="tooltip" title="{{ times.lastPublished.timestamp | date:'medium' }}">Last Published: {{ times.lastPublished.timesince }} ago</span>
+                    <span class="label label-info" data-toggle="tooltip" title="{{ times.lastModified.timestamp | date:'medium' }}">Last Modified: {{ times.lastModified.timesince }} ago</span>
+                    <br>-->
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div ng-repeat="widget in page.widgets">
+  <template id="dynamic_button.html" type="text/ng-template">
+    <a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+  </template>
+  <div class="container" ng-if="auth.canEdit">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group pull-right widget-actions">
+          <button type="button" class="btn btn-xs btn-default" disabled="disabled">{{ widget.widgetType }}</button>
+          <button type="button" class="btn btn-xs btn-info" ng-click="widget.swapAlignment()"  ng-if="widget.widgetType == 'featurette'"><span class="glyphicon glyphicon-transfer"></span></button>
+          <button type="button" class="btn btn-xs btn-info" ng-click="widget.toggleDivider()"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
+          <button type="button" class="btn btn-xs btn-primary" ng-click="page.moveWidgetUp(widget)" ng-disabled="page.isFirstWidget(widget)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+          <button type="button" class="btn btn-xs btn-primary" ng-click="page.moveWidgetDown(widget)" ng-disabled="page.isLastWidget(widget)"><span class="glyphicon glyphicon-arrow-down"></span></button>
+          <button type="button" class="btn btn-xs btn-warning" ng-click="page.resetWidget(widget)"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+          <button type="button" class="btn btn-xs btn-danger" ng-click="page.deleteWidget(widget)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container" ng-if="widget.hasDivider">
+    <div class="row">
+      <div class="col-md-12">
+        <hr class="featurette-divider">
+      </div>
+    </div>
+  </div>
+  <div ng-class="{'container': widget.widgetType != 'carousel'}">
+    <div ng-class="{'row': widget.widgetType != 'carousel'}" ng-switch="widget.widgetType">
+      <!-- Page Header -->
+      <div class="col-md-12" ng-switch-when="pageheader">
+        <div class="page-header">
+          <h1>
+            <span>{{ widget.headingText }}</span>
+            <small>{{ widget.subHeadingText }}</small>
+          </h1>
+        </div>
+      </div>
+      <!-- Jumbotron -->
+      <div class="col-md-12" ng-switch-when="jumbotron">
+        <div class="jumbotron">
+          <div class="container">
+            <h1>
+              <span>{{ widget.headingText }}</span>
+              <span class="small">{{ widget.subHeadingText  }}</span>
+            </h1>
+            <p>{{ widget.bodyText  }}</p>
+            <p ng-include="dynamic_button.html"></p>
+          </div>
+        </div>
+      </div>
+      <!-- Carousel -->
+      <div id="carousel-{{ $index }}" class="carousel slide hidden-xs" data-ride="carousel" ng-switch-when="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-{{ $parent.$index }}" data-slide-to="{{ $index }}" ng-class="{'active': $first}"  ng-repeat="panel in widget.panelContent"></li>
+        </ol>
 
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item" ng-class="{'active': $first}" ng-repeat="panel in widget.panelContent">
+            <img ng-src="{{ panel.image }}">
+            <div class="carousel-caption">
+              <h2>{{ panel.headingText }}</h2>
+              <p>{{ panel.bodyText }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-{{ $index }}" data-slide="prev">
+          <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-{{ $index }}" data-slide="next">
+          <span class="icon-next"></span>
+        </a>
+      </div>
+      <!-- Well -->
+      <div class="col-md-12" ng-switch-when="well">
+        <div class="well">
+          <div>{{ widget.bodyText }}</div>
+        </div>
+      </div>
+      <!-- Grid -->
+      <div class="col-md-12" ng-switch-when="grid">
+        <div class="container marketing">
+          <div class="row">
+            <div class="col-sm-{{12 / widget.panelContent.length | floor}}" ng-repeat="panel in widget.panelContent">
+              <img class="img-circle" ng-src="{{ panel.image }}">
+              <h2>{{ panel.headingText }}</h2>
+              <div>{{ panel.bodyText }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Thumbnail -->
+      <div class="col-md-12" ng-switch-when="thumbnail">
+        <div class="container marketing">
+          <div class="row">
+            <div class="col-sm-{{12 / widget.panelContent.length | floor}}" ng-repeat="panel in widget.panelContent">
+              <div class="thumbnail">
+                <img ng-src="{{ panel.image }}">
+                <div class="caption" ng-if="panel.headingText != null || panel.subHeadingText != null || panel.bodyText != null || panel.button != null">
+                  <h3 ng-if="panel.headingText != null">{{ panel.headingText }}</h3>
+                  <h4 ng-if="panel.subHeadingText != null">{{ panel.subHeadingText }}</h4>
+                  <p ng-if="panel.bodyText != null">{{ panel.bodyText }}</p>
+                  <template id="dynamic_panel_button.html" type="text/ng-template">
+                    <a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+                  </template>
+                  <p ng-include="dynamic_panel_button.html"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Featurette -->
+      <div class="col-md-12" ng-switch-when="featurette">
+        <div class="container marketing">
+          <div class="row featurette" ng-switch="widget.alignment">
+            <script id="widget_featurette_image.html" type="text/ng-template">
+              <div class="col-md-5">
+                <img class="featurette-image img-responsive" ng-src="{{ widget.images[0] }}">
+              </div>
+            </script>
+            <div ng-switch-when="left">
+              <ng-include src="'widget_featurette_image.html'"></ng-include>
+            </div>
+            <div class="col-md-7">
+              <h2 class="featurette-heading">
+                <span>{{ widget.headingText }}</span>
+                <span class="small">{{ widget.subHeadingText }}</span>
+              </h2>
+              <div class="lead">{{ widget.bodyText }}</div>
+              <div ng-include="dynamic_button.html"></div>
+            </div>
+            <div ng-switch-when="right">
+              <ng-include src="'widget_featurette_image.html'"></ng-include>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Text -->
+      <div class="col-md-12" ng-switch-when="text">
+        {{widget.bodyText}}
+      </div>
+      <!-- HTML -->
+      <div class="col-md-12" ng-switch-when="html">
+        <div ng-bind-html="widget.bodyText"></div>
+      </div>
+      <!-- YouTube -->
+      <div class="col-md-12" ng-switch-when="youtube">
+        <div class="embed-responsive embed-responsive-16by9">
+          <!--<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ page.$sce.trustAsResourceUrl(widget.videoUrl) }}"></iframe>-->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
