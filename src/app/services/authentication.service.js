@@ -28,17 +28,25 @@
         auth.$onAuth(function(authData) {
           if (authData) {
             var userRef = ref.child('users').child(authData.uid);
-            factory.user = $firebaseObject(userRef);
-            factory.user.name = authData.google.displayName;
-            factory.user.email = authData.google.email;
-            factory.user.profilePicture = authData.google.profileImageURL;
-            factory.user.$save().then(function(ref) {
-              factory.signedIn = true;
-            }, function(error) {
-              factory.signedIn = false;
+            factory.user = User(userRef);
+            factory.user.$loaded().then(function() {
+              factory.user.name = authData.google.displayName;
+              factory.user.email = authData.google.email;
+              factory.user.profilePicture = authData.google.profileImageURL;
+              factory.user.$save().then(function (ref) {
+                factory.signedIn = true;
+              }, function (error) {
+                factory.signedIn = false;
+              });
             });
           } else {
             factory.signedIn = false;
+          }
+        });
+
+        var User = $firebaseObject.$extend({
+          isAdmin: function() {
+            return this.role === 'admin';
           }
         });
 

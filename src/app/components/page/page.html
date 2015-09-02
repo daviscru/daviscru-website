@@ -30,7 +30,7 @@
     <div class="col-md-12">
       <br>
       <div class="well text-center">
-        <div class="page-message">Opps</div>
+        <div class="page-message">Oops</div>
         <h2>The requested page could not be found</h2>
         <h4>Please use the menu above to find what you are looking for.</h4>
         <a href="/home" type="button" class="btn btn-primary">Home <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -38,7 +38,7 @@
     </div>
   </div>
 </div>
-<div class="admin-toolbar-wrapper" ng-if="page.loadStatus == 'success' && page.auth.canEdit">
+<div class="admin-toolbar-wrapper" ng-if="page.loadStatus == 'success' && page.auth.user.isAdmin()">
   <div class="container">
     <div class="row">
       <div class="col-md-12 admin-toolbar">
