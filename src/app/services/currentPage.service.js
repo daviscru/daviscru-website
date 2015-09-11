@@ -14,7 +14,7 @@
         var ref = new Firebase(firebaseUrl + 'pages/' + $filter('firebasePageUrl')(factory.url) + '/title');
         var fbTitle = $firebaseObject(ref);
         return fbTitle.$loaded().then(function(obj){
-          factory.title = obj.$value;
+          factory.title = obj.$value ? obj.$value : 'Error';
           $window.document.title = 'Cru at UC Davis | ' + factory.title;
           return factory;
         });
