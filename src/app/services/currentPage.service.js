@@ -3,7 +3,7 @@
 
   angular
     .module('davisCru')
-    .factory('currentPage', ["$window", "$filter", "firebaseUrl", "$firebaseObject", function ($window, $filter, firebaseUrl, $firebaseObject){
+    .factory('currentPage', ["$window", "$filter", "envService", "$firebaseObject", function ($window, $filter, envService, $firebaseObject){
       var factory = {};
 
       factory.url = 'home';
@@ -11,7 +11,7 @@
 
       factory.update = function(url){
         factory.url = url;
-        var ref = new Firebase(firebaseUrl + 'pages/' + $filter('firebasePageUrl')(factory.url) + '/title');
+        var ref = new Firebase(envService.read('firebaseUrl') + 'pages/' + $filter('firebasePageUrl')(factory.url) + '/title');
         var fbTitle = $firebaseObject(ref);
         return fbTitle.$loaded().then(function(obj){
           factory.title = obj.$value ? obj.$value : 'Error';

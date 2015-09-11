@@ -4,7 +4,6 @@
 
   angular
     .module('davisCru')
-    .constant('moment', moment)
-    .constant('firebaseUrl', 'https://daviscru.firebaseio.com/');
+    .constant('moment', moment);
 
 })();

@@ -10,7 +10,8 @@
       'ui.router',
       'firebase',
       'angulartics',
-      'angulartics.google.analytics'
+      'angulartics.google.analytics',
+      'environment'
     ]);
 
 })();

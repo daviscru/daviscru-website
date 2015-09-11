@@ -3,9 +3,9 @@
 
   angular
     .module('davisCru')
-    .factory("fbMenu", ["firebaseUrl", "$firebaseArray",
-      function(firebaseUrl, $firebaseArray) {
-        var ref = new Firebase(firebaseUrl + 'menu');
+    .factory("fbMenu", ["envService", "$firebaseArray",
+      function(envService, $firebaseArray) {
+        var ref = new Firebase(envService.read('firebaseUrl') + 'menu');
 
         return $firebaseArray(ref);
       }

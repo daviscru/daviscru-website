@@ -3,11 +3,11 @@
 
   angular
     .module('davisCru')
-    .factory("fbWidgets", ["$filter", "firebaseUrl", "$firebaseArray",
-      function($filter, firebaseUrl, $firebaseArray ) {
+    .factory("fbWidgets", ["$filter", "envService", "$firebaseArray",
+      function($filter, envService, $firebaseArray ) {
         return function(pageUrl){
 
-          var ref = new Firebase(firebaseUrl + 'pages/' + $filter('firebasePageUrl')(pageUrl) + '/widgets');
+          var ref = new Firebase(envService.read('firebaseUrl') + 'pages/' + $filter('firebasePageUrl')(pageUrl) + '/widgets');
           return $firebaseArray(ref);
         };
       }

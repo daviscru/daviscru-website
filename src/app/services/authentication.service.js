@@ -3,13 +3,13 @@
 
   angular
     .module('davisCru')
-    .factory('authentication', ["$log", "firebaseUrl", "$firebaseAuth", "$firebaseObject",
-      function ($log, firebaseUrl, $firebaseAuth, $firebaseObject){
+    .factory('authentication', ["$log", "envService", "$firebaseAuth", "$firebaseObject",
+      function ($log, envService, $firebaseAuth, $firebaseObject){
         var factory = {};
 
         factory.signedIn = false;
 
-        var ref = new Firebase(firebaseUrl);
+        var ref = new Firebase(envService.read('firebaseUrl'));
         var auth = $firebaseAuth(ref);
 
         factory.login = function(){
