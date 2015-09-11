@@ -3,12 +3,11 @@
 
   angular
     .module('davisCru')
-    .controller('PageController', ['global', 'fbWidgets', 'authentication', PageController]);
+    .controller('PageController', ['currentPage', 'fbWidgets', 'authentication', PageController]);
 
   /** @ngInject */
-  function PageController(global, fbWidgets, authentication) {
-    this.global = global;
-    this.widgets = fbWidgets(global.getPageUrl());
+  function PageController(currentPage, fbWidgets, authentication) {
+    this.widgets = fbWidgets(currentPage.url);
     this.auth = authentication;
     this.loadStatus = 'loading';
 

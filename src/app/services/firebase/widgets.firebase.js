@@ -3,14 +3,11 @@
 
   angular
     .module('davisCru')
-    .factory("fbWidgets", ["firebaseUrl", "$firebaseArray",
-      function(firebaseUrl, $firebaseArray ) {
+    .factory("fbWidgets", ["$filter", "firebaseUrl", "$firebaseArray",
+      function($filter, firebaseUrl, $firebaseArray ) {
         return function(pageUrl){
-          //remove trailing slash
-          pageUrl = pageUrl.replace(/\/$/, ''); // Match a forward slash / at the end of the string ($)
-          //replace slashes with /subPages/ to find deeper pages in subPages objects
-          pageUrl = pageUrl.replace('/', '/subPages/');
-          var ref = new Firebase(firebaseUrl + 'pages/' + pageUrl + '/widgets');
+
+          var ref = new Firebase(firebaseUrl + 'pages/' + $filter('firebasePageUrl')(pageUrl) + '/widgets');
           return $firebaseArray(ref);
         };
       }

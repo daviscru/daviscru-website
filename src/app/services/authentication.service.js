@@ -28,7 +28,7 @@
         auth.$onAuth(function(authData) {
           if (authData) {
             var userRef = ref.child('users').child(authData.uid);
-            factory.user = User(userRef);
+            factory.user = new User(userRef);
             factory.user.$loaded().then(function() {
               factory.user.name = authData.google.displayName;
               factory.user.email = authData.google.email;

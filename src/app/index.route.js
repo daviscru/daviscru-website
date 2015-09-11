@@ -13,8 +13,10 @@
         templateUrl: '/app/components/page/page.html',
         controller: 'PageController',
         controllerAs: 'page',
-        onEnter: function(global, $stateParams){
-          global.setPageUrl($stateParams.pageUrl || 'home');
+        resolve: {
+          currentPageResolve: function(currentPage, $stateParams){
+            return currentPage.update($stateParams.pageUrl || 'home');
+          }
         }
       });
     $urlRouterProvider.otherwise('/');
