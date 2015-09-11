@@ -3,8 +3,8 @@
 
   angular
     .module('davisCru')
-    .factory('authentication', ["firebaseUrl", "$firebaseAuth", "$firebaseObject",
-      function (firebaseUrl, $firebaseAuth, $firebaseObject){
+    .factory('authentication', ["$log", "firebaseUrl", "$firebaseAuth", "$firebaseObject",
+      function ($log, firebaseUrl, $firebaseAuth, $firebaseObject){
         var factory = {};
 
         factory.signedIn = false;
@@ -13,10 +13,10 @@
         var auth = $firebaseAuth(ref);
 
         factory.login = function(){
-          auth.$authWithOAuthPopup("google", { scope: 'email' }).then(function(authData) {
+          auth.$authWithOAuthPopup("google", { scope: 'email' }).then(function() {
             //everything is handled in $onAuth function below
           }).catch(function(error) {
-            console.error("Authentication failed:", error);
+            $log.error("Authentication failed:", error);
           });
         };
 
@@ -33,9 +33,10 @@
               factory.user.name = authData.google.displayName;
               factory.user.email = authData.google.email;
               factory.user.profilePicture = authData.google.profileImageURL;
-              factory.user.$save().then(function (ref) {
+              factory.user.$save().then(function() {
                 factory.signedIn = true;
               }, function (error) {
+                $log.error("Failed to save user data to Firebase:", error);
                 factory.signedIn = false;
               });
             });

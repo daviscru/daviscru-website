@@ -5,7 +5,7 @@
 
     beforeEach(module('davisCru'));
 
-    it('should load the controller ok', inject(function($controller) {
+    it('should load the controller ok', inject(function(/*$controller*/) {
       //var vm = $controller('PageController');
 
       /*expect(angular.isArray(vm.awesomeThings)).toBeTruthy();

@@ -10,7 +10,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: '/app/components/menu/menu.html',
-      controller: ['currentPage', 'fbMenu', 'authentication', MenuController],
+      controller: ['$log', 'currentPage', 'fbMenu', 'authentication', MenuController],
       controllerAs: 'menu',
       bindToController: true
     };
@@ -18,7 +18,7 @@
     return directive;
 
     /** @ngInject */
-    function MenuController(currentPage, fbMenu, authentication) {
+    function MenuController($log, currentPage, fbMenu, authentication) {
       this.menuItems = fbMenu;
       this.auth = authentication;
       this.loaded = false;
@@ -26,7 +26,7 @@
       this.menuItems.$loaded(function() {
         this.loaded = true;
       }.bind(this), function(error) {
-        console.error("Error:", error);
+        $log.error("Error loading menu items:", error);
       });
 
       this.isCategory = function(item){
@@ -56,7 +56,9 @@
             /* Chrome refresh fix */
             var sel = $(".navbar-logo")[0];
             sel.style.display='none';
+            /* jshint ignore:start */
             sel.offsetHeight; // no need to store this anywhere, the reference is enough
+            /* jshint ignore:end */
             sel.style.display='inline';
             /*****/
             return 150;

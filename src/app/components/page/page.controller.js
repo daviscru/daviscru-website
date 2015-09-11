@@ -3,10 +3,10 @@
 
   angular
     .module('davisCru')
-    .controller('PageController', ['currentPage', 'fbWidgets', 'authentication', PageController]);
+    .controller('PageController', ['$log', 'currentPage', 'fbWidgets', 'authentication', PageController]);
 
   /** @ngInject */
-  function PageController(currentPage, fbWidgets, authentication) {
+  function PageController($log, currentPage, fbWidgets, authentication) {
     this.widgets = fbWidgets(currentPage.url);
     this.auth = authentication;
     this.loadStatus = 'loading';
@@ -19,7 +19,7 @@
       }
     }.bind(this), function(error) {
       this.loadStatus = 'error';
-      console.error("Error:", error);
+      $log.error("Error loading page widgets:", error);
     }.bind(this));
   }
 })();
