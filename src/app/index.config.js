@@ -10,7 +10,7 @@
     envServiceProvider.config({
       domains: {
         development: ['localhost', 'staging.daviscru.com', 'staging.daviscru.divshot.io'],
-        production: ['daviscru.com', 'www.daviscru.com', 'production.daviscru.divshot.io', 'daviscru.divshot.io']
+        production: ['daviscru.com', 'www.daviscru.com', 'production.daviscru.divshot.io']
       },
       vars: {
         development: {
