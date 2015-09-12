@@ -96,9 +96,9 @@
   </div>
 </div>
 <div ng-repeat="widget in page.widgets">
-  <template id="dynamic_button.html" type="text/ng-template">
+  <script id="dynamic_button.html" type="text/ng-template">
     <a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
-  </template>
+  </script>
   <div class="container" ng-if="auth.canEdit">
     <div class="row">
       <div class="col-md-12">
@@ -141,7 +141,7 @@
               <span class="small">{{ widget.subHeadingText  }}</span>
             </h1>
             <p>{{ widget.bodyText  }}</p>
-            <p ng-include="dynamic_button.html"></p>
+            <p ng-include="'dynamic_button.html'"></p>
           </div>
         </div>
       </div>
@@ -200,10 +200,10 @@
                   <h3 ng-if="panel.headingText != null">{{ panel.headingText }}</h3>
                   <h4 ng-if="panel.subHeadingText != null">{{ panel.subHeadingText }}</h4>
                   <p ng-if="panel.bodyText != null">{{ panel.bodyText }}</p>
-                  <template id="dynamic_panel_button.html" type="text/ng-template">
+                  <script id="dynamic_panel_button.html" type="text/ng-template">
                     <a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
-                  </template>
-                  <p ng-include="dynamic_panel_button.html"></p>
+                  </script>
+                  <p ng-include="'dynamic_panel_button.html'"></p>
                 </div>
               </div>
             </div>
@@ -228,7 +228,7 @@
                 <span class="small">{{ widget.subHeadingText }}</span>
               </h2>
               <div class="lead">{{ widget.bodyText }}</div>
-              <div ng-include="dynamic_button.html"></div>
+              <div ng-include="'dynamic_button.html'"></div>
             </div>
             <div ng-switch-when="right">
               <ng-include src="'widget_featurette_image.html'"></ng-include>
