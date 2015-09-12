@@ -126,3 +126,8 @@ h1 .small, h2 .small{
 .stats-form .form-control{
   margin-bottom: 7px;
 }
+
+.caret {
+  //fix for when CSSO (CSS Optimizer) strips out duplicate properties
+  border-top: 4px dashed;
+}
