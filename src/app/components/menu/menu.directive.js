@@ -111,8 +111,9 @@
       var navMain = $(".navbar-collapse");
 
       navMain.on("click", "a", null, function () {
-        navMain.collapse('hide');
-        console.log('collapsing');
+        if($(this).attr("data-toggle") !== 'dropdown'){
+          navMain.collapse('hide');
+        }
       });
     }
   }
