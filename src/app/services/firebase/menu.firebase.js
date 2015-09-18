@@ -3,12 +3,13 @@
 
   angular
     .module('davisCru')
-    .factory("fbMenu", ["envService", "$firebaseArray",
-      function(envService, $firebaseArray) {
-        var ref = new Firebase(envService.read('firebaseUrl') + 'menu');
+    .factory("fbMenu", fbMenuService);
 
-        return $firebaseArray(ref);
-      }
-    ]);
+  /** @ngInject */
+  function fbMenuService(envService, $firebaseArray) {
+    var ref = new Firebase(envService.read('firebaseUrl') + 'menu');
+
+    return $firebaseArray(ref);
+  }
 
 })();

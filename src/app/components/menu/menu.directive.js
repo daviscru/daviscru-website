@@ -10,7 +10,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: '/app/components/menu/menu.html',
-      controller: ['$log', 'currentPage', 'fbMenu', 'authentication', MenuController],
+      controller: MenuController,
       controllerAs: 'menu',
       bindToController: true
     };
@@ -19,27 +19,28 @@
 
     /** @ngInject */
     function MenuController($log, currentPage, fbMenu, authentication) {
-      this.menuItems = fbMenu;
-      this.auth = authentication;
-      this.loaded = false;
+      var vm = this;
+      vm.menuItems = fbMenu;
+      vm.auth = authentication;
+      vm.loaded = false;
 
-      this.menuItems.$loaded(function() {
-        this.loaded = true;
-      }.bind(this), function(error) {
+      vm.menuItems.$loaded(function() {
+        vm.loaded = true;
+      }, function(error) {
         $log.error("Error loading menu items:", error);
       });
 
-      this.isCategory = function(item){
+      vm.isCategory = function(item){
         return item.url === undefined && item.category !== undefined;
       };
-      this.hasSubPages = function(item){
+      vm.hasSubPages = function(item){
         return item.subPages !== undefined;
       };
-      this.getProcessedUrl = function(item){
-        return this.hasSubPages(item) ? '#' : '/' + item.url;
+      vm.getProcessedUrl = function(item){
+        return vm.hasSubPages(item) ? '#' : '/' + item.url;
       };
 
-      this.isActive = function(menuItemUrl){
+      vm.isActive = function(menuItemUrl){
         return currentPage.getBaseUrl() === menuItemUrl;
       };
 

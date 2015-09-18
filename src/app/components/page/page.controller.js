@@ -3,23 +3,24 @@
 
   angular
     .module('davisCru')
-    .controller('PageController', ['$log', 'currentPage', 'fbWidgets', 'authentication', PageController]);
+    .controller('PageController', PageController);
 
   /** @ngInject */
   function PageController($log, currentPage, fbWidgets, authentication) {
-    this.widgets = fbWidgets(currentPage.url);
-    this.auth = authentication;
-    this.loadStatus = 'loading';
+    var vm = this;
+    vm.widgets = fbWidgets(currentPage.url);
+    vm.auth = authentication;
+    vm.loadStatus = 'loading';
 
-    this.widgets.$loaded(function() {
-      if(this.widgets.length === 0){
-        this.loadStatus = 'error';
+    vm.widgets.$loaded(function() {
+      if(vm.widgets.length === 0){
+        vm.loadStatus = 'error';
       }else{
-        this.loadStatus = 'success';
+        vm.loadStatus = 'success';
       }
-    }.bind(this), function(error) {
-      this.loadStatus = 'error';
+    }, function(error) {
+      vm.loadStatus = 'error';
       $log.error("Error loading page widgets:", error);
-    }.bind(this));
+    });
   }
 })();
