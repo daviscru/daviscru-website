@@ -98,7 +98,10 @@
 
 <div ng-repeat="widget in widgets">
   <script id="dynamic_button.html" type="text/ng-template">
-    <a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+    <a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button.label != null && widget.button.label != ''" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+    <div ng-if="page.auth.isAdmin()">Label: <small contenteditable="{{page.auth.isAdmin()}}" ng-model="widget.button.label"></small></div>
+    <div ng-if="page.auth.isAdmin()">Uri: <small contenteditable="{{page.auth.isAdmin()}}" ng-model="widget.button.uri"></small></div>
+    <div ng-if="page.auth.isAdmin()">Target: <small contenteditable="{{page.auth.isAdmin()}}" ng-model="widget.button.target"></small></div>
   </script>
   <div class="container" ng-if="auth.canEdit">
     <div class="row">
@@ -199,12 +202,15 @@
               <div class="thumbnail">
                 <img ng-src="{{ panel.image }}">
                 <span contenteditable="{{page.auth.isAdmin()}}" ng-if="page.auth.isAdmin()" ng-model="panel.image"></span>
-                <div class="caption" ng-if="panel.headingText != null || panel.subHeadingText != null || panel.bodyText != null || panel.button != null">
-                  <h3 ng-if="panel.headingText != null" contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.headingText"></h3>
-                  <h4 ng-if="panel.subHeadingText != null" contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.subHeadingText"></h4>
-                  <p ng-if="panel.bodyText != null" contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.bodyText"></p>
+                <div class="caption" ng-if="(panel.headingText != null && panel.headingText != '') || (panel.subHeadingText != null && panel.subHeadingText != '') || (panel.bodyText != null && panel.bodyText != '') || (panel.button.label != null && panel.button.label != '') || page.auth.isAdmin()">
+                  <h3 ng-if="panel.headingText != null || panel.headingText != '' || page.auth.isAdmin()" contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.headingText"></h3>
+                  <h4 ng-if="panel.subHeadingText != null || panel.subHeadingText != '' || page.auth.isAdmin()" contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.subHeadingText"></h4>
+                  <p ng-if="panel.bodyText != null || panel.bodyText != '' || page.auth.isAdmin()" contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.bodyText"></p>
                   <script id="dynamic_panel_button.html" type="text/ng-template">
-                    <a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button.label != null && panel.button.label != ''" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <div ng-if="page.auth.isAdmin()">Label: <small contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.button.label"></small></div>
+                    <div ng-if="page.auth.isAdmin()">Uri: <small contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.button.uri"></small></div>
+                    <div ng-if="page.auth.isAdmin()">Target: <small contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.button.target"></small></div>
                   </script>
                   <p ng-include="'dynamic_panel_button.html'"></p>
                 </div>
