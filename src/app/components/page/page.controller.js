@@ -10,6 +10,8 @@
     var vm = this;
     vm.auth = authentication;
     vm.loadStatus = 'loading';
+
+    vm.addWidget = addWidget;
     vm.swapAlignment = swapAlignment;
     vm.toggleDivider = toggleDivider;
     vm.moveWidgetUp = moveWidgetUp;
@@ -29,9 +31,16 @@
       });
     }
 
-    function swapAlignment(widget){
-      widget.alignment == "left" ? widget.alignment = "right" : widget.alignment = "left";
+    function addWidget(type){
+      var i;
+      for(i = 0; $scope.widgets[i + 1] !== undefined; i++){};
+      $scope.widgets[i + 1] = {widgetType: type};
     }
+
+    function swapAlignment(widget){
+      widget.alignment = widget.alignment === "left" ? "right" : "left";
+    }
+
     function toggleDivider(widget){
       widget.hasDivider = !widget.hasDivider;
     }
@@ -53,9 +62,14 @@
     }
 
     function deleteWidget(index){
-      for(var i = index; $scope.widgets[i + 1] != undefined; i++){
+      var found = false;
+      for(var i = index; $scope.widgets[i + 1] !== undefined; i++){
         $scope.widgets[i] = $scope.widgets[i + 1];
         delete $scope.widgets[i + 1];
+        found = true;
+      }
+      if(!found){
+        delete $scope.widgets[index];
       }
     }
 

@@ -112,7 +112,6 @@
           <button type="button" class="btn btn-xs btn-info" ng-click="page.toggleDivider(widget)"><span class="glyphicon" ng-class="{'glyphicon-check': widget.hasDivider, 'glyphicon-unchecked': !widget.hasDivider}"></span> Divider</button>
           <button type="button" class="btn btn-xs btn-primary" ng-click="page.moveWidgetUp($index)" ng-disabled="page.isFirstWidget(widget)"><span class="glyphicon glyphicon-arrow-up"></span></button>
           <button type="button" class="btn btn-xs btn-primary" ng-click="page.moveWidgetDown($index)" ng-disabled="page.isLastWidget(widget)"><span class="glyphicon glyphicon-arrow-down"></span></button>
-          <!--<button type="button" class="btn btn-xs btn-warning" ng-click="page.resetWidget(widget)"><span class="glyphicon glyphicon-refresh"></span> Reset</button>-->
           <button type="button" class="btn btn-xs btn-danger" ng-click="page.deleteWidget($index)"><span class="glyphicon glyphicon-trash"></span> Delete</button>
         </div>
       </div>
