@@ -17,6 +17,13 @@
   }
 }
 
+// Highlight editable boxes
+[contenteditable="true"]{
+  border: rgba(255, 211, 0, 0.3) 2px solid;
+  border-radius: 5px;
+  padding: 2px;
+}
+
 /* Carousel */
 .carousel{
   margin-bottom: 20px;
