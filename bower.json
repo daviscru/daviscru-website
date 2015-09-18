@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "~1.4.0",
     "angular-animate": "~1.4.0",
+    "angular-contenteditable": "~0.3.8",
     "angular-cookies": "~1.4.0",
     "angular-environment": "~1.0.2",
     "angular-sanitize": "~1.4.0",

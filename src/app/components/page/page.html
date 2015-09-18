@@ -95,7 +95,8 @@
     </div>
   </div>
 </div>
-<div ng-repeat="widget in page.widgets">
+
+<div ng-repeat="widget in widgets">
   <script id="dynamic_button.html" type="text/ng-template">
     <a href="{{ widget.button.uri }}" type="button" class="btn btn-primary" ng-show="widget.button != null" target="{{ widget.button.target }}">{{ widget.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
   </script>
@@ -127,8 +128,8 @@
       <div class="col-md-12" ng-switch-when="pageheader">
         <div class="page-header">
           <h1>
-            <span>{{ widget.headingText }}</span>
-            <small>{{ widget.subHeadingText }}</small>
+            <span contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.headingText"></span>
+            <small contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.subHeadingText"></small>
           </h1>
         </div>
       </div>
@@ -137,10 +138,10 @@
         <div class="jumbotron">
           <div class="container">
             <h1>
-              <span>{{ widget.headingText }}</span>
-              <span class="small">{{ widget.subHeadingText  }}</span>
+              <span contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.headingText"></span>
+              <span class="small" contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.subHeadingText"></span>
             </h1>
-            <p>{{ widget.bodyText  }}</p>
+            <p contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.bodyText"></p>
             <p ng-include="'dynamic_button.html'"></p>
           </div>
         </div>
@@ -174,7 +175,7 @@
       <!-- Well -->
       <div class="col-md-12" ng-switch-when="well">
         <div class="well">
-          <div>{{ widget.bodyText }}</div>
+          <div contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.bodyText"></div>
         </div>
       </div>
       <!-- Grid -->
@@ -183,8 +184,9 @@
           <div class="row">
             <div class="col-sm-{{12 / widget.panelContent.length | floor}}" ng-repeat="panel in widget.panelContent">
               <img class="img-circle" ng-src="{{ panel.image }}">
-              <h2>{{ panel.headingText }}</h2>
-              <div>{{ panel.bodyText }}</div>
+              <span contenteditable="{{page.auth.user.isAdmin()}}" ng-if="page.auth.user.isAdmin()" ng-model="panel.image"></span>
+              <h2 contenteditable="{{page.auth.user.isAdmin()}}" ng-model="panel.headingText"></h2>
+              <div contenteditable="{{page.auth.user.isAdmin()}}" ng-model="panel.bodyText"></div>
             </div>
           </div>
         </div>
@@ -196,10 +198,11 @@
             <div class="col-sm-{{12 / widget.panelContent.length | floor}}" ng-repeat="panel in widget.panelContent">
               <div class="thumbnail">
                 <img ng-src="{{ panel.image }}">
+                <span contenteditable="{{page.auth.user.isAdmin()}}" ng-if="page.auth.user.isAdmin()" ng-model="panel.image"></span>
                 <div class="caption" ng-if="panel.headingText != null || panel.subHeadingText != null || panel.bodyText != null || panel.button != null">
-                  <h3 ng-if="panel.headingText != null">{{ panel.headingText }}</h3>
-                  <h4 ng-if="panel.subHeadingText != null">{{ panel.subHeadingText }}</h4>
-                  <p ng-if="panel.bodyText != null">{{ panel.bodyText }}</p>
+                  <h3 ng-if="panel.headingText != null" contenteditable="{{page.auth.user.isAdmin()}}" ng-model="panel.headingText"></h3>
+                  <h4 ng-if="panel.subHeadingText != null" contenteditable="{{page.auth.user.isAdmin()}}" ng-model="panel.subHeadingText"></h4>
+                  <p ng-if="panel.bodyText != null" contenteditable="{{page.auth.user.isAdmin()}}" ng-model="panel.bodyText"></p>
                   <script id="dynamic_panel_button.html" type="text/ng-template">
                     <a href="{{ panel.button.uri }}" type="button" class="btn btn-primary" ng-show="panel.button != null" target="{{ panel.button.target }}">{{ panel.button.label }} <span class="glyphicon glyphicon-chevron-right"></span></a>
                   </script>
@@ -217,6 +220,7 @@
             <script id="widget_featurette_image.html" type="text/ng-template">
               <div class="col-md-5">
                 <img class="featurette-image img-responsive" ng-src="{{ widget.images[0] }}">
+                <span contenteditable="{{page.auth.user.isAdmin()}}" ng-if="page.auth.user.isAdmin()" ng-model="widget.images[0]"></span>
               </div>
             </script>
             <div ng-switch-when="left">
@@ -224,10 +228,10 @@
             </div>
             <div class="col-md-7">
               <h2 class="featurette-heading">
-                <span>{{ widget.headingText }}</span>
-                <span class="small">{{ widget.subHeadingText }}</span>
+                <span contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.headingText"></span>
+                <span class="small" contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.subHeadingText"></span>
               </h2>
-              <div class="lead">{{ widget.bodyText }}</div>
+              <div class="lead" contenteditable="{{page.auth.user.isAdmin()}}" ng-model="widget.bodyText"></div>
               <div ng-include="'dynamic_button.html'"></div>
             </div>
             <div ng-switch-when="right">
@@ -239,6 +243,7 @@
       <!-- Text -->
       <div class="col-md-12" ng-switch-when="text">
         {{widget.bodyText}}
+        <span contenteditable="true" ng-model="widget.bodyText"></span>
       </div>
       <!-- HTML -->
       <div class="col-md-12" ng-switch-when="html">

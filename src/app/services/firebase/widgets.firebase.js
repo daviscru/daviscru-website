@@ -6,11 +6,11 @@
     .factory("fbWidgets", fbWidgetsService);
 
   /** @ngInject */
-  function fbWidgetsService($filter, envService, $firebaseArray ) {
+  function fbWidgetsService($filter, envService, $firebaseObject) {
     return function(pageUrl){
 
       var ref = new Firebase(envService.read('firebaseUrl') + 'pages/' + $filter('firebasePageUrl')(pageUrl) + '/widgets');
-      return $firebaseArray(ref);
+      return $firebaseObject(ref);
     };
   }
 

@@ -11,7 +11,8 @@
       'firebase',
       'angulartics',
       'angulartics.google.analytics',
-      'environment'
+      'environment',
+      'contenteditable'
     ]);
 
 })();
