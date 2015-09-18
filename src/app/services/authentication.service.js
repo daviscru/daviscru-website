@@ -53,6 +53,10 @@
       }
     });
 
+    factory.isAdmin = function(){
+      return factory.signedIn && factory.user.isAdmin();
+    };
+
     return factory;
   }
 
