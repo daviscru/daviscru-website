@@ -25,20 +25,7 @@
     </div>
   </div>
 </div>
-<div class="container" ng-if="page.loadStatus == 'error'">
-  <div class="row">
-    <div class="col-md-12">
-      <br>
-      <div class="well text-center">
-        <div class="page-message">Oops</div>
-        <h2>The requested page could not be found</h2>
-        <h4>Please use the menu above to find what you are looking for.</h4>
-        <a href="/home" type="button" class="btn btn-primary">Home <span class="glyphicon glyphicon-chevron-right"></span></a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="admin-toolbar-wrapper" ng-if="page.loadStatus == 'success' && page.auth.isAdmin()">
+<div class="admin-toolbar-wrapper" ng-if="page.auth.isAdmin()">
   <div class="container">
     <div class="row">
       <div class="col-md-12 admin-toolbar">
@@ -58,25 +45,25 @@
                 <li class="divider"></li>
                 <li class="dropdown-header">Content Pieces</li>
                 <li><a href="#" ng-click="page.addWidget('well')">Well</a></li>
-                <li><a href="#" ng-click="page.addWidget('3-panel-grid')">3 Panel Grid</a></li>
+                <li><a href="#" ng-click="page.addWidget('grid')">Grid</a></li>
                 <li><a href="#" ng-click="page.addWidget('featurette')">Featurette</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">Simple Widgets</li>
                 <li><a href="#" ng-click="page.addWidget('text')">Text</a></li>
-                <li><a href="#" ng-click="page.addWidget('html')">HTML Code</a></li>
-                <li class="divider"></li>
+                <!--<li><a href="#" ng-click="page.addWidget('html')">HTML Code</a></li>-->
+                <!--<li class="divider"></li>
                 <li class="dropdown-header">External Resources</li>
-                <li><a href="#" ng-click="page.addWidget('youtube')">YouTube Video</a></li>
+                <li><a href="#" ng-click="page.addWidget('youtube')">YouTube Video</a></li>-->
               </ul>
             </div>
           </div>
-          <div class="btn-group">
+          <!--<div class="btn-group">
             <button type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-list"></span> Manage Subpages</button>
-          </div>
+          </div>-->
           <div class="btn-group">
             <!--<button type="button" class="btn btn-info" disabled="disabled"><span class="glyphicon glyphicon-eye-open"></span> Show Page</button>-->
-            <button type="button" class="btn btn-info" disabled="disabled"><span class="glyphicon glyphicon-eye-close"></span> Hide Page</button>
-            <button type="button" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Page Settings</button>
+            <!--<button type="button" class="btn btn-info" disabled="disabled"><span class="glyphicon glyphicon-eye-close"></span> Hide Page</button>-->
+            <!--<button type="button" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-cog"></span> Page Settings</button>-->
             <button type="button" class="btn btn-danger" data-page-operation="discardChanges"><span class="glyphicon glyphicon-repeat"></span> Discard Changes</button>
           </div>
         </div>
@@ -91,6 +78,19 @@
                     <br>-->
           <br>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" ng-if="page.loadStatus == 'error'">
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <div class="well text-center">
+        <div class="page-message">Oops</div>
+        <h2>The requested page could not be found</h2>
+        <h4>Please use the menu above to find what you are looking for.</h4>
+        <a href="/home" type="button" class="btn btn-primary">Home <span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
     </div>
   </div>
@@ -160,8 +160,9 @@
           <div class="item" ng-class="{'active': $first}" ng-repeat="panel in widget.panelContent">
             <img ng-src="{{ panel.image }}">
             <div class="carousel-caption">
-              <h2>{{ panel.headingText }}</h2>
-              <p>{{ panel.bodyText }}</p>
+              <span contenteditable="{{page.auth.isAdmin()}}" ng-if="page.auth.isAdmin()" ng-model="panel.image"></span>
+              <h2 contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.headingText"></h2>
+              <p contenteditable="{{page.auth.isAdmin()}}" ng-model="panel.bodyText"></p>
             </div>
           </div>
         </div>
@@ -247,18 +248,18 @@
       </div>
       <!-- Text -->
       <div class="col-md-12" ng-switch-when="text">
-        {{widget.bodyText}}
-        <span contenteditable="true" ng-model="widget.bodyText"></span>
+        <span contenteditable="{{page.auth.isAdmin()}}" ng-model="widget.bodyText"></span>
       </div>
       <!-- HTML -->
       <div class="col-md-12" ng-switch-when="html">
-        <div ng-bind-html="widget.bodyText"></div>
+        <div contenteditable="false" ng-model="widget.bodyText"></div>
       </div>
       <!-- YouTube -->
       <div class="col-md-12" ng-switch-when="youtube">
         <div class="embed-responsive embed-responsive-16by9">
-          <!--<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ page.$sce.trustAsResourceUrl(widget.videoUrl) }}"></iframe>-->
+          <iframe class="embed-responsive-item" ng-src="{{ page.$sce.trustAsResourceUrl('//www.youtube.com/embed/' + widget.videoUrl) }}"></iframe>
         </div>
+        <span contenteditable="{{page.auth.isAdmin()}}" ng-model="widget.videoUrl"></span>
       </div>
     </div>
   </div>
