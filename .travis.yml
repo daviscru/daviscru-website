@@ -1,11 +1,18 @@
 install:
   - npm install
+  - npm install firebase-tools
   - bower install
 script:
   - gulp
+after_success:
+  - firebase --non-interactive deploy --token "${FIREBASE_TOKEN}"
 deploy:
   - provider: divshot
     environment: staging
     skip_cleanup: true
     api_key:
       secure: MZlAugUAhLY1GBIfMNiUujuRYamyvPBXUY8U1aFU2TtHGJRszKcnVQnHMbcNIFHkuxnRu0GWhPnAqBL5Zy5yqz8vwiunCxDckx6Zx2HvyrCn3j6tLyOk7khmkCPmyAE0KSuJpRMlYxvOS8AiVyA7jf494bmuw64NP9Kf+LbZcGQ3V/cm/TbuehNSSQtTx2ElgHh0mm3VIBJhh0wjKg8ejZXdeTKxe94Sp+iX/nhnm+oOaKxs1haEQn3q7Twk/OX/XVFA+ZVv9evw7tMBP106DlRmnKpxIiGSZE8ioLi9U38pGvt451tlx1dyXahivEC1yc+AMF9eFPp67hNuMEF0D4VNYTVRLGrkfbg4CAnc2g6N/8LXsG6eXEvhbJ5iwmFrWJqMDDrWQC+SF9cEHI8mZF1eY7NphOVttYrqLK6MyXI6iJyhDHfloPg79I8jmaTHyJCiAkCdHHTgi0YsIELDNbo4+GprLzmf//BIeddiOS+hFAD4PQouSeXop115x8cKRNyRO+xEPFgTBVwLqUWJWdcTjiWY1wHuwBzADHsuj0CtPc0tUq+ZIUeQKMc310kJ8kNGelIBvBbohdSXJ5dVOv3LqfKWTAdCild9ZwpM8ioeATMfQ4OXDVyme1S1NlbdiJ8vGOTOBjWFp8wiEuw1y8HbapYxPEa7+Y+i6vdntaY=
+cache:
+  directories:
+  - node_modules
+  - bower_components
