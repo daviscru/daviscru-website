@@ -9,8 +9,8 @@
   function config($logProvider, envServiceProvider) {
     envServiceProvider.config({
       domains: {
-        development: ['localhost', 'staging.daviscru.com', 'staging.daviscru.divshot.io'],
-        production: ['daviscru.com', 'www.daviscru.com', 'production.daviscru.divshot.io']
+        development: ['localhost', 'staging.daviscru.com', 'staging.daviscru.divshot.io', 'daviscru-staging.firebaseapp.com'],
+        production: ['daviscru.com', 'www.daviscru.com', 'production.daviscru.divshot.io', 'daviscru.firebaseapp.com']
       },
       vars: {
         development: {
