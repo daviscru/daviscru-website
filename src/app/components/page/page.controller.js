@@ -33,7 +33,7 @@
 
     function addWidget(type){
       var i;
-      for(i = 0; $scope.widgets[i] !== undefined; i++){};
+      for(i = 0; $scope.widgets[i] !== undefined; i++){}
       $scope.widgets[i] = {
         widgetType: type,
         alignment: 'left',

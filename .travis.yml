@@ -1,6 +1,5 @@
 install:
   - npm install
-  - npm install firebase-tools
   - bower install
 script:
   - gulp

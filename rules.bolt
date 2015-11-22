@@ -1,0 +1,44 @@
+function hasAuth(){
+  return auth != null;
+}
+function isAdmin(){
+  return hasAuth() && root.users[auth.uid].role == 'admin';
+}
+function authMatchesPath(userUid){
+  return hasAuth() && auth.uid == userUid;
+}
+
+path / {
+  read() = false;
+  write() = false;
+}
+
+path /menu {
+  read() = true;
+  write() = isAdmin();
+}
+
+path /pages {
+  read() = true;
+  write() = isAdmin();
+}
+
+type User {
+  name: String,
+  email: String,
+  profilePicture: String,
+  role: Role | Null
+}
+type Role extends String {
+  validate() = this == 'admin' || this == 'user';
+}
+path /users {
+  read() = isAdmin();
+}
+path /users/$user_uid is User {
+  read() = authMatchesPath($user_uid) || isAdmin();
+  write() = authMatchesPath($user_uid);
+}
+path /users/$user_uid/role {
+  write() = isAdmin();
+}
