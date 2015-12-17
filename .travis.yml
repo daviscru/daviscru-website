@@ -10,3 +10,6 @@ cache:
   directories:
   - node_modules
   - bower_components
+language: node_js
+node_js:
+  - "4.1"
